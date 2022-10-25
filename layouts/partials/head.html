@@ -14,7 +14,9 @@
     <link href="{{ "webfonts/ptserif/main.css" | absURL }}" rel='stylesheet' type='text/css'>
     <link href="{{ "webfonts/source-code-pro/main.css" | absURL }}" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="{{ "css/style.css" | absURL }}">
+    {{ $templateStyles := resources.Get "css/style.css" }}
+    {{ $styles := $templateStyles | resources.ExecuteAsTemplate "css/styles.css" . }}
+    <link rel="stylesheet" type="text/css" href="{{ $styles.RelPermalink }}">
     {{ range .Site.Params.customCss -}}
         <link rel="stylesheet" href="{{ . | absURL }}">
     {{- end }}
