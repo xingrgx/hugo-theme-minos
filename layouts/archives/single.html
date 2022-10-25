@@ -1,0 +1,44 @@
+{{ partial "head.html" . }}
+
+<body>
+  <div id="container">
+    {{ partial "header.html" . }}
+
+    <section id="main" class="outer">
+      <section class="archives-wrap">
+        <div class="archive-category-wrap">
+          <span class="archive-category">{{ .Title }}</span>
+        </div>
+        <div class="archives">
+
+          {{ range where .Site.Pages "Section" "post" }}
+          {{ range (.Pages.GroupByDate "2006-01") }}
+          <div>
+            <details class="menu" close>
+              <summary>{{ .Key }} ({{len .Pages}})</summary>
+              <div class="layout-wrap-inner">
+
+                <ul style="list-style-type: none;">
+                  {{ range .Pages }}
+                  <li>
+                    <p>
+                      <a class="article-entry" style="text-decoration:none" href="{{ .RelPermalink }}"
+                        title="{{ .Title }}">{{ .Title }}</a>
+                    </p>
+                  </li>
+                  {{ end }}
+              </div>
+              </ul>
+            </details>
+          </div>
+          {{ end }}
+          {{ end }}
+
+        </div>
+      </section>
+    </section>
+    {{ partial "footer.html" . }}
+  </div>
+</body>
+
+</html>
