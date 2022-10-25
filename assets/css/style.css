@@ -69,6 +69,7 @@ body {
   line-height: 1;
   color: #000;
   background: #fff;
+  counter-reset: fig;
 }
 ol,
 ul {
@@ -1092,4 +1093,24 @@ pre .php .xml {
   font-size: 16px;
   font-family: 'PT Serif', 'STZhongsong', '华文中宋', 'Microsoft Yahei', serif;
   text-shadow: 1px 3px 3px rgba(0,0,0,0.5);
+}
+
+/* Figures */
+figure {
+  text-align: center;
+}
+figcaption {
+  font-size: 0.85rem;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+main {
+  display: block;
+  counter-reset: fig;
+  min-height: 100vh;
+}
+figcaption::before {
+  counter-increment: fig;
+  content: 'Figure ' counter(fig) ':\0020';
+  font-weight: bold;
 }
