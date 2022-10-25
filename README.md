@@ -1,5 +1,11 @@
 # Minos
 
+## TODO
+
+- [ ] 手机端目录
+- [ ] 明暗主题切换
+- [ ] 回到顶部按钮
+
 **_A simple and retro styled theme, concentrated more on your ideas._**
 
 Minos is a Hugo theme ported from Hexo theme [Minos](https://github.com/ppoffice/hexo-theme-minos). Requires Hugo v0.59+.
