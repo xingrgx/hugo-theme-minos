@@ -9,15 +9,24 @@
         <div class="archive-category-wrap">
           <span class="archive-category">{{ .Title }}</span>
         </div>
+        <!-- store all .md posts in articles notes and photos directory to $pages -->
+        {{ $pages := slice}}
+        {{range .Site.Pages}}
+        {{ if or (eq .Type "articles") (eq .Type "notes") (eq .Type "photos")}}
+        {{if or (eq .Title "Articles") (eq .Title "Notes") (eq .Title "Photos")}}
+        {{else}}
+        {{$pages = $pages | append .}}
+        {{end}}
+        {{end}}
+        {{end}}
+        
         <div class="archives">
-
-          {{ range where .Site.Pages "Section" "post" }}
-          {{ range (.Pages.GroupByDate "2006-01") }}
+          <h2> Archived By Class</h2></br>
+          {{range $pages.GroupBy "Section"}}
           <div>
             <details class="menu" close>
               <summary>{{ .Key }} ({{len .Pages}})</summary>
               <div class="layout-wrap-inner">
-
                 <ul style="list-style-type: none;">
                   {{ range .Pages }}
                   <li>
@@ -26,14 +35,33 @@
                         title="{{ .Title }}">{{ .Title }}</a>
                     </p>
                   </li>
-                  {{ end }}
+                  {{end}}
+                </ul>
               </div>
-              </ul>
             </details>
           </div>
-          {{ end }}
-          {{ end }}
-
+          {{end}}
+          <br><h2> Archived By Time</h2></br>
+          
+          {{ range $pages.GroupByDate "2006-01" }}
+          <div>
+            <details class="menu" close>
+              <summary>{{ .Key }} ({{len .Pages}})</summary>
+              <div class="layout-wrap-inner">
+                <ul style="list-style-type: none;">
+                  {{ range .Pages }}
+                  <li>
+                    <p>
+                      <a class="article-entry" style="text-decoration:none" href="{{ .RelPermalink }}"
+                        title="{{ .Title }}">{{ .Title }}</a>
+                    </p>
+                  </li>
+                  {{end}}
+                </ul>
+              </div>
+            </details>
+          </div>
+          {{end}}
         </div>
       </section>
     </section>
